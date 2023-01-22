@@ -25,13 +25,13 @@ mongoose.connection.on("connected", () => console.log("MongoDB connnected"));
 mongoose.connection.on("error", (error) => console.log(error));
 
 // server side rendering
-// if (process.env.NODE_ENV == "production") {
-  app.use(express.static("./view/frontend/build"));
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static(path.join(__dirname, "./view/frontend/build")));
   app.get("*", (req, res) => {
     res.sendFile(
-      path.resolve(__dirname, "view", "frontend", "build", "index.html")
+      path.resolve(__dirname, "./view/frontend/build/index.html")
     );
   });
-// }
+}
 
 app.listen(PORT, () => console.log("Server running on port " + PORT));
