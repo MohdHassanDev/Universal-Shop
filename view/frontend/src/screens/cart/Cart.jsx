@@ -1,0 +1,134 @@
+// react
+import React, { useEffect, useState } from "react";
+
+// react router
+import { useNavigate } from "react-router-dom";
+
+// components
+import { Navbar, Footer } from "../../components";
+
+// react icons
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+
+// css
+import style from "./cart.module.css";
+
+const Cart = () => {
+  const [cart, setCart] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const products = localStorage.getItem("cart");
+    if (products === null || products === undefined) {
+    } else {
+      setCart(JSON.parse(products));
+    }
+  }, []);
+
+  return <Component cart={cart} setCart={setCart} navigate={navigate} />;
+};
+
+class Component extends React.Component {
+  render() {
+    let a = 0;
+
+    return (
+      <>
+        <Navbar />
+        <div className={style.mainDiv}>
+          <h1>Shopping Cart</h1>
+          <div className={style.underline}></div>
+          <div className={style.wrapper}>
+            {this.props.cart[0] === undefined ? (
+              <h2>your cart is empty!</h2>
+            ) : (
+              <>
+                {this.props.cart.map((ele, ind) => {
+                  return (
+                    <div key={ind} className={style.product}>
+                      <img src={ele.image.url} alt="product image" />
+                      <h2>{ele.name}</h2>
+                      <div>
+                        <button
+                          onClick={() => {
+                            if (this.props.cart[ind].quantity === 1) {
+                              this.props.cart.splice(ind, 1);
+                              this.props.setCart([...this.props.cart]);
+                              localStorage.setItem(
+                                "cart",
+                                JSON.stringify(this.props.cart)
+                              );
+                            } else {
+                              this.props.cart[ind] = {
+                                ...this.props.cart[ind],
+                                quantity: this.props.cart[ind].quantity - 1,
+                              };
+                              this.props.setCart([...this.props.cart]);
+                              localStorage.setItem(
+                                "cart",
+                                JSON.stringify(this.props.cart)
+                              );
+                            }
+                          }}
+                        >
+                          <AiOutlineMinus style={{ color: "white" }} />
+                        </button>
+                        <h3>{ele.quantity}</h3>
+                        <button
+                          onClick={() => {
+                            this.props.cart[ind] = {
+                              ...this.props.cart[ind],
+                              quantity: this.props.cart[ind].quantity + 1,
+                            };
+                            this.props.setCart([...this.props.cart]);
+                            localStorage.setItem(
+                              "cart",
+                              JSON.stringify(this.props.cart)
+                            );
+                          }}
+                        >
+                          <AiOutlinePlus style={{ color: "white" }} />
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </>
+            )}
+            <h3>
+              SubTotal:{" "}
+              {this.props.cart[0] === undefined
+                ? "PKR 0"
+                : this.props.cart.map((ele, ind, arr) => {
+                    a = a + +ele.amount * ele.quantity;
+                    if (ind === arr.length - 1) {
+                      return "PKR " + a;
+                    }
+                  })}
+            </h3>
+            <div className={style.btnDiv}>
+              <button
+                onClick={() => this.props.navigate("/checkout")}
+                className={style.btn}
+              >
+                Checkout
+              </button>
+              <button
+                className={style.btn}
+                onClick={() => {
+                  localStorage.removeItem("cart");
+                  this.props.setCart([]);
+                }}
+              >
+                Clear Cart
+              </button>
+            </div>
+          </div>
+        </div>
+        <Footer />
+      </>
+    );
+  }
+}
+
+export default Cart;

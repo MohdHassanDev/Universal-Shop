@@ -1,0 +1,61 @@
+.mainDiv {
+  min-height: 100vh;
+  height: auto;
+  width: 100%;
+  padding: 70px 50px;
+  background-color: #f0f0f0;
+}
+.mainDiv > h1 {
+  margin-top: 90px;
+  font-size: 27px;
+  font-weight: 500;
+}
+.underline {
+  background-color: #ec437c;
+  width: 50px;
+  height: 5px;
+  border-radius: 20px;
+}
+.cardWrapper {
+  margin-top: 35px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.card {
+  margin-top: 40px;
+  cursor: pointer;
+  box-shadow: 0 0 2px 2px rgb(146, 146, 146);
+  background-color: white;
+  border-radius: 4px;
+  margin-right: 40px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.card:hover {
+  transform: scale(1.07);
+  transition: all 0.4s;
+}
+.card > img {
+  border-radius: 4px 4px 0 0;
+  width: 220px;
+  height: 220px;
+}
+.card > div {
+  border-radius: 0 0 4px 4px;
+  padding: 10px 15px;
+  background-color: #f0f0f0;
+}
+.card > div > p {
+  margin-top: 10px;
+}
+.card > div > h3:nth-child(2) {
+  margin: 10px 0;
+  font-weight: 500;
+  font-size: 20px;
+}
+.card > div > h3:nth-child(3) {
+  text-align: right;
+  font-weight: 500;
+  color: #ec437c;
+}

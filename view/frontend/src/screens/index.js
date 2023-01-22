@@ -1,0 +1,11 @@
+export { default as Home } from "./home/Home";
+export { default as Adminpanel } from "./adminpanel/Adminpanel";
+export { default as Dashboard } from "./dashboard/Dashboard";
+export { default as ProductDetails } from "./productdetails/ProductDetails";
+export { default as Checkout } from "./checkout/Checkout";
+export { default as Cart } from "./cart/Cart";
+export { default as Mobile } from "./mobile/Mobile";
+export { default as Tablet } from "./tablet/Tablet";
+export { default as Laptop } from "./laptop/Laptop";
+export { default as Signup } from "./signup/Signup";
+export { default as Login } from "./login/Login";

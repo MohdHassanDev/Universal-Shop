@@ -1,0 +1,244 @@
+/* header */
+
+.header {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  position: fixed;
+  z-index: 1;
+}
+.menu {
+  display: none;
+}
+
+/* header first child */
+
+.header > div:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.bagIcon {
+  color: #ec437c;
+  font-size: 38px;
+  margin-right: 10px;
+}
+.header > div:first-child > h1 {
+  color: white;
+  font-size: 35px;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+/* header second child */
+
+.header > div:nth-child(2) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 350px;
+}
+.header > div:nth-child(4) {
+  display: none;
+}
+.link {
+  font-weight: 500;
+  font-size: 18px;
+  text-decoration: none;
+  color: white;
+}
+.link:hover {
+  transition: all 0.1s;
+  border-bottom: 3px solid #ec437c;
+}
+
+/* header third child */
+
+.header > div:nth-child(3) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header > div:nth-child(5) {
+  display: none;
+}
+.btn {
+  padding: 10px 20px;
+  border: 2px solid white;
+  color: #ec437c;
+  background-color: white;
+  text-decoration: none;
+  font-size: 17px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.btn:hover {
+  transition: all 0.3s;
+  background-color: transparent;
+  color: white;
+}
+.btn2 {
+  cursor: pointer;
+  padding: 10px 20px;
+  border: 2px solid #ec437c;
+  color: white;
+  background-color: #ec437c;
+  text-decoration: none;
+  font-size: 17px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+.btn2:hover {
+  transition: all 0.3s;
+  background-color: white;
+  color: #ec437c;
+}
+
+/* Footer */
+
+.footer {
+  background-color: #ec437c;
+  color: white;
+  padding: 30px;
+}
+
+/* footer first child */
+
+.footer > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.footer > div > div:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer > div > div:first-child > h1 {
+  color: white;
+  font-size: 35px;
+  margin-top: 5px;
+  font-weight: 600;
+}
+.footer > div > div:nth-child(2) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 350px;
+}
+.footerLinks {
+  font-weight: 500;
+  font-size: 18px;
+  text-decoration: none;
+  color: white;
+}
+.footerLinks:hover {
+  transition: all 0.1s;
+  border-bottom: 3px solid white;
+}
+
+/* footer second child */
+
+.footer > p {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 16.5px;
+}
+
+/* media query */
+
+@media only screen and (max-width: 1050px) {
+  .header > div:nth-child(2) {
+    display: none;
+  }
+  .header > div:nth-child(3) {
+    display: none;
+  }
+  .header > div:nth-child(4) {
+    background-color: white;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 20px;
+    width: 100%;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .header > div:nth-child(5) {
+    background-color: white;
+    position: absolute;
+    top: 185%;
+    z-index: -1;
+    left: 0;
+    padding: 20px;
+    width: 100%;
+    height: 140px;
+    display: flex;
+    align-items: flex-end;
+    border-radius: 0 0 15px 15px;
+  }
+  .link:hover {
+    border-bottom: none;
+  }
+  .btn2:hover {
+    background-color: #ec437c;
+    color: white;
+  }
+  .menu {
+    color: #ec437c;
+    font-size: 39px;
+    cursor: pointer;
+    display: flex;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .footer > div {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .footer > div > div:first-child {
+    margin-bottom: 20px;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .header {
+    padding: 20px 10px;
+  }
+  .bagIcon {
+    font-size: 30px;
+    margin-right: 5px;
+  }
+  .header > div:first-child > h1 {
+    font-size: 28px;
+  }
+  .menu {
+    font-size: 33px;
+  }
+  .footer {
+    padding: 30px 10px;
+  }
+  .footer > div > div:first-child > h1 {
+    font-size: 30px;
+  }
+}
+
+@media only screen and (max-width: 370px) {
+  .footer > div > div:nth-child(2) {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+  }
+}
