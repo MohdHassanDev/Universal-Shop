@@ -1,3 +1,3 @@
-const Base_URI = "http://localhost:5000/api/";
+const Base_URI = "https://universal-shop.vercel.app/api/";
 
 export default Base_URI;
