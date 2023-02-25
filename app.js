@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5000;
 // body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ origin: "https://universal-shop.vercel.app/", credentials: true }));
+app.use(cors({ origin: "https://universal-shop.herokuapp.com/", credentials: true }));
 app.use(router);
 
 const DB_URI = process.env.DB;
