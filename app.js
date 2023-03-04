@@ -1,11 +1,11 @@
 const express = require("express");
 const cors = require("cors");
 const { default: mongoose } = require("mongoose");
-const router = require("./routes/routes");
-const cloudinaryConfig = require("./utils/cloudinary");
-const cloudinary = require("cloudinary").v2;
-cloudinary.config(cloudinaryConfig);
 const path = require("path");
+const router = require("./routes/routes");
+const cloudinary = require("cloudinary").v2;
+const cloudinaryConfig = require("./utils/cloudinary");
+cloudinary.config(cloudinaryConfig);
 
 require("dotenv").config();
 
@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5000;
 // body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ origin: "https://universal-shop.herokuapp.com/", credentials: true }));
+app.use(cors({ origin: "https://universal-shop.vercel.app/", credentials: true }));
 app.use(router);
 
 const DB_URI = process.env.DB;

@@ -52,60 +52,55 @@ const Mobile = () => {
       getProducts();
     }
   }, []);
-  return <Component loading={loading} product={product} navigate={navigate} />;
-};
 
-class Component extends React.Component {
-  render() {
-    return (
-      <>
-        <Navbar />
-        <Toast />
-        <div className={style.mainDiv}>
-          <h1>Mobile Phones</h1>
-          <div className={style.underline}></div>
-          {this.props.loading ? (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "60vh",
-              }}
-            >
-              <img src={loader} alt="loader" width="130px" />
-            </div>
-          ) : (
-            <div className={style.cardWrapper}>
-              {this.props.product.map((ele, ind, details) => {
-                return (
-                  <div
-                    key={ind}
-                    className={style.card}
-                    onClick={() => {
-                      localStorage.setItem(
-                        "product",
-                        JSON.stringify(details[ind])
-                      );
-                      this.props.navigate("/productdetails");
-                    }}
-                  >
-                    <img src={ele.image.url} alt="product image" />
-                    <div>
-                      <p>{ele.category}</p>
-                      <h3>{ele.name}</h3>
-                      <h3>PKR {ele.amount}</h3>
-                    </div>
+  return (
+    <>
+      <Navbar />
+      <Toast />
+      <div className={style.mainDiv}>
+        <h1>Mobile Phones</h1>
+        <div className={style.underline}></div>
+        {loading ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "60vh",
+            }}
+          >
+            <img src={loader} alt="loader" width="130px" />
+          </div>
+        ) : (
+          <div className={style.cardWrapper}>
+            {product.map((ele, ind, details) => {
+              return (
+                <div
+                  key={ind}
+                  className={style.card}
+                  onClick={() => {
+                    localStorage.setItem(
+                      "product",
+                      JSON.stringify(details[ind])
+                    );
+                    navigate("/productdetails");
+                  }}
+                >
+                  <img src={ele.image.url} alt="product image" />
+                  <div>
+                    <p>{ele.category}</p>
+                    <h3>{ele.name}</h3>
+                    <h3>PKR {ele.amount}</h3>
                   </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
-        <Footer />
-      </>
-    );
-  }
-}
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+      <Footer />
+    </>
+  );
+};
 
 export default Mobile;

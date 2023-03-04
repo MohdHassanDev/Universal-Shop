@@ -223,370 +223,349 @@ const Adminpanel = () => {
   };
 
   return (
-    <Component
-      loading={loading}
-      product={product}
-      setProduct={setProduct}
-      logout={logout}
-      addProduct={addProduct}
-      editProduct={editProduct}
-      editproduct={editproduct}
-      setEditProduct={setEditProduct}
-      deleteProduct={deleteProduct}
-      deleteUser={deleteUser}
-      getproduct={getproduct}
-      user={user}
-    />
-  );
-};
+    <>
+      <Navbar />
+      <div className={style.mainDiv}>
+        <Toast />
+        <h1>Adminpanel</h1>
+        <div className={style.underline}></div>
 
-class Component extends React.Component {
-  render() {
-    return (
-      <>
-        <Navbar />
-        <div className={style.mainDiv}>
-          <Toast />
-          <h1>Adminpanel</h1>
-          <div className={style.underline}></div>
-
-          {this.props.loading ? (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "60vh",
-              }}
-            >
-              <img src={loader} alt="loader" width="130px" />
-            </div>
-          ) : (
-            <div className={style.container}>
-              {this.props.product.click ? (
-                <div className={style.addProduct}>
-                  <form onSubmit={(e) => this.props.addProduct(e)}>
-                    <select
-                      value={this.props.product.category}
-                      onChange={(e) =>
-                        this.props.setProduct({
-                          ...this.props.product,
-                          category: e.target.value,
-                        })
-                      }
-                    >
-                      <option value="Mobile Phones">Mobile Phones</option>
-                      <option value="Tablets">Tablets</option>
-                      <option value="Laptops">Laptops</option>
-                    </select>
-                    <input
-                      type="text"
-                      placeholder="Product Name"
-                      required
-                      value={this.props.product.name}
-                      className={style.credentialField}
-                      onChange={(e) =>
-                        this.props.setProduct({
-                          ...this.props.product,
-                          name: e.target.value,
-                        })
-                      }
-                    />
-                    <input
-                      type="number"
-                      placeholder="Product Stock"
-                      required
-                      value={this.props.product.stock}
-                      className={style.credentialField}
-                      onChange={(e) =>
-                        this.props.setProduct({
-                          ...this.props.product,
-                          stock: e.target.value,
-                        })
-                      }
-                    />
-                    <input
-                      type="number"
-                      placeholder="Product Amount"
-                      required
-                      value={this.props.product.amount}
-                      className={style.credentialField}
-                      onChange={(e) =>
-                        this.props.setProduct({
-                          ...this.props.product,
-                          amount: e.target.value,
-                        })
-                      }
-                    />
-                    <textarea
-                      cols="30"
-                      rows="5"
-                      placeholder="Product Details"
-                      value={this.props.product.productdetails}
-                      onChange={(e) =>
-                        this.props.setProduct({
-                          ...this.props.product,
-                          productdetails: e.target.value,
-                        })
-                      }
-                      className={style.textarea}
-                    ></textarea>
-                    <div>
-                      <p>Select Image:</p>
-                      <input
-                        type="file"
-                        className={style.imageInput}
-                        required
-                        onChange={(e) => {
-                          this.props.setProduct({
-                            ...this.props.product,
-                            image: e.target.files[0],
-                          });
-                        }}
-                      />
-                    </div>
-                    <input
-                      type="submit"
-                      className={style.btn}
-                      style={{ marginTop: "5px" }}
-                      value="Add"
-                    />
-                  </form>
-                </div>
-              ) : (
-                <>
-                  <button
-                    className={style.btn}
-                    onClick={this.props.logout}
-                    style={{ marginRight: "10px" }}
-                  >
-                    Logout
-                  </button>
-                  <button
-                    className={style.btn}
-                    onClick={() =>
-                      this.props.setProduct({
-                        ...this.props.product,
-                        click: true,
+        {loading ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "60vh",
+            }}
+          >
+            <img src={loader} alt="loader" width="130px" />
+          </div>
+        ) : (
+          <div className={style.container}>
+            {product.click ? (
+              <div className={style.addProduct}>
+                <form onSubmit={(e) => addProduct(e)} encType="multipart/form-data">
+                  <select
+                    value={product.category}
+                    onChange={(e) =>
+                      setProduct({
+                        ...product,
+                        category: e.target.value,
                       })
                     }
                   >
-                    Add Product
-                  </button>
-                </>
-              )}
-              <div>
-                <h2>All Products</h2>
-                <div
-                  className={style.underline}
-                  style={{ width: "30px", height: "4px" }}
-                ></div>
-                <div className={style.subContainer}>
-                  <table style={{ minWidth: "1450px" }}>
-                    <thead>
-                      <tr>
-                        <th>S.NO</th>
-                        <th>Product Category</th>
-                        <th>Product Name</th>
-                        <th>Product Details</th>
-                        <th>Product Stock</th>
-                        <th>Product Amount</th>
-                        <th>Edit Product</th>
-                        <th>Delete Product</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.props.getproduct.map((ele, ind) => {
-                        return (
-                          <tr key={ind}>
-                            <td>{ind + 1}</td>
-                            <td>
-                              {this.props.editproduct.index === ind ? (
-                                <select
-                                  value={this.props.editproduct.category}
-                                  onChange={(e) =>
-                                    this.props.setEditProduct({
-                                      ...this.props.editproduct,
-                                      category: e.target.value,
-                                    })
-                                  }
-                                >
-                                  <option value="Mobile Phones">
-                                    Mobile Phones
-                                  </option>
-                                  <option value="Tablets">Tablets</option>
-                                  <option value="Laptops">Laptops</option>
-                                </select>
-                              ) : (
-                                <>{ele.category}</>
-                              )}
-                            </td>
-                            <td>
-                              {this.props.editproduct.index === ind ? (
-                                <input
-                                  type="text"
-                                  placeholder="Product Name"
-                                  required
-                                  value={this.props.editproduct.name}
-                                  className={style.credentialField}
-                                  onChange={(e) =>
-                                    this.props.setEditProduct({
-                                      ...this.props.editproduct,
-                                      name: e.target.value,
-                                    })
-                                  }
-                                />
-                              ) : (
-                                ele.name
-                              )}
-                            </td>
-                            <td style={{ width: "400px" }}>
-                              {this.props.editproduct.index === ind ? (
-                                <textarea
-                                  cols="30"
-                                  rows="5"
-                                  placeholder="Product Details"
-                                  value={this.props.editproduct.productdetails}
-                                  onChange={(e) =>
-                                    this.props.setEditProduct({
-                                      ...this.props.editproduct,
-                                      productdetails: e.target.value,
-                                    })
-                                  }
-                                  className={style.textarea}
-                                ></textarea>
-                              ) : (
-                                ele.productdetails
-                              )}
-                            </td>
-                            <td>
-                              {this.props.editproduct.index === ind ? (
-                                <input
-                                  type="number"
-                                  placeholder="Product Stock"
-                                  required
-                                  value={this.props.editproduct.stock}
-                                  className={style.credentialField}
-                                  onChange={(e) =>
-                                    this.props.setEditProduct({
-                                      ...this.props.editproduct,
-                                      stock: e.target.value,
-                                    })
-                                  }
-                                />
-                              ) : (
-                                ele.stock
-                              )}
-                            </td>
-                            <td>
-                              {this.props.editproduct.index === ind ? (
-                                <input
-                                  type="number"
-                                  placeholder="Product Amount"
-                                  required
-                                  value={this.props.editproduct.amount}
-                                  className={style.credentialField}
-                                  onChange={(e) =>
-                                    this.props.setEditProduct({
-                                      ...this.props.editproduct,
-                                      amount: e.target.value,
-                                    })
-                                  }
-                                />
-                              ) : (
-                                ele.amount
-                              )}
-                            </td>
-                            <td>
-                              {this.props.editproduct.click ? (
-                                <button
-                                  className={style.btn}
-                                  onClick={this.props.editProduct}
-                                >
-                                  Edit
-                                </button>
-                              ) : (
-                                <button
-                                  className={style.btn}
-                                  onClick={() =>
-                                    this.props.setEditProduct({
-                                      click: true,
-                                      index: ind,
-                                      id: ele._id,
-                                      name: ele.name,
-                                      amount: ele.amount,
-                                      category: ele.category,
-                                      stock: ele.stock,
-                                      productdetails: ele.productdetails,
-                                    })
-                                  }
-                                >
-                                  Edit Product
-                                </button>
-                              )}
-                            </td>
-                            <td>
+                    <option value="Mobile Phones">Mobile Phones</option>
+                    <option value="Tablets">Tablets</option>
+                    <option value="Laptops">Laptops</option>
+                  </select>
+                  <input
+                    type="text"
+                    placeholder="Product Name"
+                    required
+                    value={product.name}
+                    className={style.credentialField}
+                    onChange={(e) =>
+                      setProduct({
+                        ...product,
+                        name: e.target.value,
+                      })
+                    }
+                  />
+                  <input
+                    type="number"
+                    placeholder="Product Stock"
+                    required
+                    value={product.stock}
+                    className={style.credentialField}
+                    onChange={(e) =>
+                      setProduct({
+                        ...product,
+                        stock: e.target.value,
+                      })
+                    }
+                  />
+                  <input
+                    type="number"
+                    placeholder="Product Amount"
+                    required
+                    value={product.amount}
+                    className={style.credentialField}
+                    onChange={(e) =>
+                      setProduct({
+                        ...product,
+                        amount: e.target.value,
+                      })
+                    }
+                  />
+                  <textarea
+                    cols="30"
+                    rows="5"
+                    placeholder="Product Details"
+                    value={product.productdetails}
+                    onChange={(e) =>
+                      setProduct({
+                        ...product,
+                        productdetails: e.target.value,
+                      })
+                    }
+                    className={style.textarea}
+                  ></textarea>
+                  <div>
+                    <p>Select Image:</p>
+                    <input
+                      type="file"
+                      className={style.imageInput}
+                      required
+                      onChange={(e) => {
+                        setProduct({
+                          ...product,
+                          image: e.target.files[0],
+                        });
+                      }}
+                    />
+                  </div>
+                  <input
+                    type="submit"
+                    className={style.btn}
+                    style={{ marginTop: "5px" }}
+                    value="Add"
+                  />
+                </form>
+              </div>
+            ) : (
+              <>
+                <button
+                  className={style.btn}
+                  onClick={logout}
+                  style={{ marginRight: "10px" }}
+                >
+                  Logout
+                </button>
+                <button
+                  className={style.btn}
+                  onClick={() =>
+                    setProduct({
+                      ...product,
+                      click: true,
+                    })
+                  }
+                >
+                  Add Product
+                </button>
+              </>
+            )}
+            <div>
+              <h2>All Products</h2>
+              <div
+                className={style.underline}
+                style={{ width: "30px", height: "4px" }}
+              ></div>
+              <div className={style.subContainer}>
+                <table style={{ minWidth: "1450px" }}>
+                  <thead>
+                    <tr>
+                      <th>S.NO</th>
+                      <th>Product Category</th>
+                      <th>Product Name</th>
+                      <th>Product Details</th>
+                      <th>Product Stock</th>
+                      <th>Product Amount</th>
+                      <th>Edit Product</th>
+                      <th>Delete Product</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {getproduct.map((ele, ind) => {
+                      return (
+                        <tr key={ind}>
+                          <td>{ind + 1}</td>
+                          <td>
+                            {editproduct.index === ind ? (
+                              <select
+                                value={editproduct.category}
+                                onChange={(e) =>
+                                  setEditProduct({
+                                    ...editproduct,
+                                    category: e.target.value,
+                                  })
+                                }
+                              >
+                                <option value="Mobile Phones">
+                                  Mobile Phones
+                                </option>
+                                <option value="Tablets">Tablets</option>
+                                <option value="Laptops">Laptops</option>
+                              </select>
+                            ) : (
+                              <>{ele.category}</>
+                            )}
+                          </td>
+                          <td>
+                            {editproduct.index === ind ? (
+                              <input
+                                type="text"
+                                placeholder="Product Name"
+                                required
+                                value={editproduct.name}
+                                className={style.credentialField}
+                                onChange={(e) =>
+                                  setEditProduct({
+                                    ...editproduct,
+                                    name: e.target.value,
+                                  })
+                                }
+                              />
+                            ) : (
+                              ele.name
+                            )}
+                          </td>
+                          <td style={{ width: "400px" }}>
+                            {editproduct.index === ind ? (
+                              <textarea
+                                cols="30"
+                                rows="5"
+                                placeholder="Product Details"
+                                value={editproduct.productdetails}
+                                onChange={(e) =>
+                                  setEditProduct({
+                                    ...editproduct,
+                                    productdetails: e.target.value,
+                                  })
+                                }
+                                className={style.textarea}
+                              ></textarea>
+                            ) : (
+                              ele.productdetails
+                            )}
+                          </td>
+                          <td>
+                            {editproduct.index === ind ? (
+                              <input
+                                type="number"
+                                placeholder="Product Stock"
+                                required
+                                value={editproduct.stock}
+                                className={style.credentialField}
+                                onChange={(e) =>
+                                  setEditProduct({
+                                    ...editproduct,
+                                    stock: e.target.value,
+                                  })
+                                }
+                              />
+                            ) : (
+                              ele.stock
+                            )}
+                          </td>
+                          <td>
+                            {editproduct.index === ind ? (
+                              <input
+                                type="number"
+                                placeholder="Product Amount"
+                                required
+                                value={editproduct.amount}
+                                className={style.credentialField}
+                                onChange={(e) =>
+                                  setEditProduct({
+                                    ...editproduct,
+                                    amount: e.target.value,
+                                  })
+                                }
+                              />
+                            ) : (
+                              ele.amount
+                            )}
+                          </td>
+                          <td>
+                            {editproduct.click ? (
+                              <button
+                                className={style.btn}
+                                onClick={editProduct}
+                              >
+                                Edit
+                              </button>
+                            ) : (
                               <button
                                 className={style.btn}
                                 onClick={() =>
-                                  this.props.deleteProduct(ele._id)
+                                  setEditProduct({
+                                    click: true,
+                                    index: ind,
+                                    id: ele._id,
+                                    name: ele.name,
+                                    amount: ele.amount,
+                                    category: ele.category,
+                                    stock: ele.stock,
+                                    productdetails: ele.productdetails,
+                                  })
                                 }
                               >
-                                Delete Product
+                                Edit Product
                               </button>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div>
-                <h2>All Users</h2>
-                <div
-                  className={style.underline}
-                  style={{ width: "30px", height: "4px" }}
-                ></div>
-                <div className={style.subContainer}>
-                  <table style={{ minWidth: "700px" }}>
-                    <thead>
-                      <tr>
-                        <th>S.NO</th>
-                        <th>Name</th>
-                        <th>Email Address</th>
-                        <th>Delete User</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.props.user.map((ele, ind) => {
-                        return (
-                          <tr key={ind}>
-                            <td>{ind + 1}</td>
-                            <td>{ele.name}</td>
-                            <td>{ele.email}</td>
-                            <td>
-                              <button
-                                className={style.btn}
-                                onClick={() => this.props.deleteUser(ele._id)}
-                              >
-                                Delete User
-                              </button>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </div>
+                            )}
+                          </td>
+                          <td>
+                            <button
+                              className={style.btn}
+                              onClick={() =>
+                                deleteProduct(ele._id)
+                              }
+                            >
+                              Delete Product
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
               </div>
             </div>
-          )}
-        </div>
-        <Footer />
-      </>
-    );
-  }
-}
+            <div>
+              <h2>All Users</h2>
+              <div
+                className={style.underline}
+                style={{ width: "30px", height: "4px" }}
+              ></div>
+              <div className={style.subContainer}>
+                <table style={{ minWidth: "700px" }}>
+                  <thead>
+                    <tr>
+                      <th>S.NO</th>
+                      <th>Name</th>
+                      <th>Email Address</th>
+                      <th>Delete User</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {user.map((ele, ind) => {
+                      return (
+                        <tr key={ind}>
+                          <td>{ind + 1}</td>
+                          <td>{ele.name}</td>
+                          <td>{ele.email}</td>
+                          <td>
+                            <button
+                              className={style.btn}
+                              onClick={() => deleteUser(ele._id)}
+                            >
+                              Delete User
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+      <Footer />
+    </>
+  );
+};
 
 export default Adminpanel;

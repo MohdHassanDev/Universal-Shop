@@ -1,5 +1,5 @@
 // react
-import React, { Component } from "react";
+import React from "react";
 
 // react router
 import { NavLink } from "react-router-dom";
@@ -10,41 +10,35 @@ import { BsFillHandbagFill } from "react-icons/bs";
 // css
 import style from "./component.module.css";
 
-class Footer extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div className={style.footer}>
+const Footer = () => {
+  return (
+    <div className={style.footer}>
+      <div>
         <div>
-          <div>
-            <BsFillHandbagFill
-              className={style.bagIcon}
-              style={{
-                color: "white",
-              }}
-            />
-            <h1>UNIVERSAL SHOP</h1>
-          </div>
-          <div>
-            <NavLink to="/mobile" className={style.footerLinks}>
-              Mobile Phones
-            </NavLink>
-            <NavLink to="/tablet" className={style.footerLinks}>
-              Tablets
-            </NavLink>
-            <NavLink to="/laptop" className={style.footerLinks}>
-              Laptops
-            </NavLink>
-          </div>
+          <BsFillHandbagFill
+            className={style.bagIcon}
+            style={{
+              color: "white",
+            }}
+          />
+          <h1>UNIVERSAL SHOP</h1>
         </div>
-        <hr />
-        <p>Copyright © 2022 Universal Shop — All Rights Reserved</p>
+        <div>
+          <NavLink to="/mobile" className={style.footerLinks}>
+            Mobile Phones
+          </NavLink>
+          <NavLink to="/tablet" className={style.footerLinks}>
+            Tablets
+          </NavLink>
+          <NavLink to="/laptop" className={style.footerLinks}>
+            Laptops
+          </NavLink>
+        </div>
       </div>
-    );
-  }
-}
+      <hr />
+      <p>Copyright © 2022 Universal Shop — All Rights Reserved</p>
+    </div>
+  );
+};
 
 export default Footer;
