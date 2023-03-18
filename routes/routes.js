@@ -29,7 +29,7 @@ router.post("/api/addproducts/:id", authToken, addProducts);
 router.post(
   "/api/imageUpload/:id",
   authToken,
-  upload.single("file"),
+  upload.single("image"),
   imageUpload
 );
 
